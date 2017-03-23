@@ -189,6 +189,9 @@ class HTMLConfluenceTranslator(HTMLTranslator):
         self.context.append('')
         self.body.append(self.imgtag(filename, suffix, **atts))
 
+    def depart_image(self, node):
+        self.body.append(self.context.pop())
+
     def visit_title(self, node):
         if isinstance(node.parent, nodes.section) and not TitlesCache.has_title(self.document):
             h_level = self.section_level + self.initial_header_level - 1
